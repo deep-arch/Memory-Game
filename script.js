@@ -10,7 +10,7 @@ const COLORS = [
   "blue",
   "green",
   "orange",
-  "purple"
+  "purple",
 ];
 
 // here is a helper function to shuffle an array
@@ -57,10 +57,47 @@ function createDivsForColors(colorArray) {
   }
 }
 
+let flipped = (lockCards = false);
+let firstChoice, secondChoice;
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  console.log("you clicked",event.target);
+  if (lockCards) return;
+  if (this === firstChoice) return;
+  const color = event.target.classList.value;
+
+  event.currentTarget.style.backgroundColor = color;
+
+  if (flipped) {
+    flipped = false;
+    secondChoice = this;
+    match();
+  } else {
+    flipped = true;
+    firstChoice = this;
+  }
+}
+
+function match() {
+  firstChoice.classList.value === secondChoice.classList.value
+    ? removeEvents()
+    : resetCards();
+}
+
+function removeEvents() {
+  firstChoice.removeEventListener("click", handleCardClick);
+  secondChoice.removeEventListener("click", handleCardClick);
+  [firstChoice, secondChoice] = [null, null];
+}
+
+function resetCards() {
+  lockCards = true;
+  setTimeout(() => {
+    firstChoice.style.backgroundColor = "unset";
+    secondChoice.style.backgroundColor = "unset";
+    [firstChoice, secondChoice] = [null, null];
+    lockCards = false;
+  }, 1 * 1000);
 }
 
 // when the DOM loads
