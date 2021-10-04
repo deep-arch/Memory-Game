@@ -77,7 +77,10 @@ function handleCardClick(event) {
     flipped = true;
     firstChoice = this;
   }
-  count == 5 ? alert("game over!") : "";
+  if(count == 5){
+    alert("game over!");
+    location.reload(true);
+  }
 }
 
 function match() {
