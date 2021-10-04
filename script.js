@@ -1,4 +1,4 @@
-const gameContainer = document.getElementsById("game");
+const gameContainer = document.getElementById("game");
 
 const COLORS = [
   "red",
