@@ -59,6 +59,7 @@ function createDivsForColors(colorArray) {
 
 let flipped = (lockCards = false);
 let firstChoice, secondChoice;
+let count = 0;
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
@@ -76,12 +77,17 @@ function handleCardClick(event) {
     flipped = true;
     firstChoice = this;
   }
+  count == 5 ? alert("game over!") : "";
 }
 
 function match() {
-  firstChoice.classList.value === secondChoice.classList.value
-    ? removeEvents()
-    : resetCards();
+  if (firstChoice.classList.value === secondChoice.classList.value)
+  {
+    removeEvents();
+    count += 1;
+  }else{
+     resetCards();
+  }
 }
 
 function removeEvents() {
